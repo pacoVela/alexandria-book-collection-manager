@@ -16,21 +16,21 @@ module Alexandria
       attr_reader :predicate_operator_rule, :dialog
 
       def initialize(parent)
-        @dialog = Gtk::Dialog.new(title: "",
-                                  parent: parent,
-                                  flags: :modal,
-                                  buttons: [[Gtk::STOCK_HELP, :help]])
+        @dialog = Gtk::Dialog.new_with_buttons("",
+                                               parent,
+                                               :modal,
+                                               [[Gtk::STOCK_HELP, :help]])
 
         @dialog.window_position = :center
         @dialog.resizable = true
         @dialog.border_width = 4
-        @dialog.child.border_width = 12
+        @dialog.content_area.border_width = 12
 
         main_box = Gtk::Box.new :vertical, 0
         main_box.border_width = 4
         main_box.spacing = 8
 
-        @dialog.child << main_box
+        @dialog.content_area.add main_box
 
         @smart_library_rules = []
 
@@ -47,8 +47,8 @@ module Alexandria
         scrollview.set_size_request(-1, 125)
         scrollview.add_with_viewport(@rules_box)
 
-        main_box.pack_start(@rules_header_box, expand: false, fill: false)
-        main_box << scrollview
+        main_box.pack_start(@rules_header_box, false, false, 0)
+        main_box.add scrollview
         setup_calendar_widgets
       end
 
@@ -225,12 +225,12 @@ module Alexandria
 
       def setup_calendar_widgets
         @popup_displayed = false
-        @calendar_popup = Gtk::Window.new # Gtk::Window::POPUP)
+        @calendar_popup = Gtk::Window.new Gtk::WindowType::POPUP
         # @calendar_popup.modal = true
         @calendar_popup.decorated = false
         @calendar_popup.skip_taskbar_hint = true
         @calendar_popup.skip_pager_hint = true
-        @calendar_popup.events = [:focus_change_mask]
+        @calendar_popup.events = Gdk::EventMask.to_int :focus_change_mask
 
         @calendar_popup.set_transient_for(@dialog)
         @calendar_popup.set_type_hint(:dialog)
