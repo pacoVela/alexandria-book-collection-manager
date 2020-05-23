@@ -21,7 +21,7 @@ Metrics/BlockNesting:
 
 # Configuration parameters: CountComments, CountAsOne.
 Metrics/ClassLength:
-  Max: 990
+  Max: 1011
 
 # Configuration parameters: IgnoredMethods.
 Metrics/CyclomaticComplexity:
@@ -33,7 +33,7 @@ Metrics/MethodLength:
 
 # Configuration parameters: CountComments, CountAsOne.
 Metrics/ModuleLength:
-  Max: 361
+  Max: 359
 
 # Configuration parameters: CountKeywordArgs.
 Metrics/ParameterLists:
