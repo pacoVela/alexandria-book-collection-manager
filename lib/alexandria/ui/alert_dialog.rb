@@ -34,7 +34,7 @@ module Alexandria
         vbox.pack_start(make_label(message.strip), false, false, 0) unless message
         hbox.pack_start(vbox, false, false, 0)
 
-        @dialog.child.pack_start(hbox)
+        @dialog.child.pack_start(hbox, false, false, 0)
       end
 
       def show_all
